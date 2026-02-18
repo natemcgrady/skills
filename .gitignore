@@ -1,0 +1,4 @@
+# ignore agent local agent files
+.agents
+.cursor
+.claude
