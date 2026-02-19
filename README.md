@@ -11,28 +11,34 @@ Skills follow the [Agent Skills](https://agentskills.io/) format.
 Remind the assistant to use Next.js 16 Proxy (`proxy.ts`) instead of Middleware (`middleware.ts`), with migration guidance.
 
 **Use when:**
+
 - Working on Next.js 16 apps
 - Creating or updating `middleware.ts`
 - Migrating existing middleware to proxy
 
 **Includes:**
+
 - Proxy-first guidance
 - Codemod command: `npx @next/codemod@canary middleware-to-proxy .`
 - Reference links to the official Next.js docs
 
-### skill-creator
+### nextjs-rendering-strategy
 
-Guide for creating or updating agent skills with proper structure, frontmatter, and packaging.
+Analyze a React/Next.js project route-by-route and decide where to use SSG, ISR, SSR, or CSR.
 
 **Use when:**
-- Creating a new skill
-- Updating an existing skill
-- Packaging or validating skills
+
+- Planning rendering strategy for routes
+- Improving performance and SEO
+- Reducing compute cost
+- Fixing stale or personalized content issues
 
 **Covers:**
-- Skill anatomy (`SKILL.md`, `scripts/`, `references/`, `assets/`)
-- Writing guidelines (concise, imperative)
-- Packaging workflow (`scripts/package_skill.py`)
+
+- Decision framework (SSG/ISR/SSR/CSR definitions, quick checklist)
+- Strategy matrix (cacheability vs. freshness SLA)
+- Implementation patterns for App Router and Pages Router
+- Common archetypes (marketing, blog, e-commerce, SaaS)
 
 ## Installation
 
@@ -45,16 +51,19 @@ npx skills add natemcgrady/skills
 Skills are automatically available once installed. The agent will use them when relevant tasks are detected.
 
 **Examples:**
-```
-Create a new skill for PDF editing
-```
+
 ```
 We're on Next.js 16 - should I add middleware.ts?
+```
+
+```
+Should my landing page be statically generated?
 ```
 
 ## Skill Structure
 
 Each skill contains:
+
 - `SKILL.md` - Instructions for the agent
 - `scripts/` - Helper scripts for automation (optional)
 - `references/` - Supporting documentation (optional)
