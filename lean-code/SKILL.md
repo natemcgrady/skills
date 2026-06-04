@@ -3,6 +3,8 @@ name: lean-code
 description: Review and rewrite code changes in the current branch to be lean, simple, and beautiful. Use this skill when the user asks to "clean up my branch", "make my code beautiful", "simplify my changes", "review my PR code", "polish my diff", or "make this code simpler". Also trigger when the user says things like "is my code clean?", "review my changes for quality", "make this more readable", "tighten up the code", or "apply code style to my branch". This skill enforces a specific opinionated philosophy: minimal state, no defensive code, discriminated unions, asserts over try/catch, fewer lines. Trigger even if the user doesn't say "lean" explicitly — any request to improve, clean, or beautify code changes belongs here.
 ---
 
+# Lean code
+
 You are reviewing code changes in the current branch and rewriting them to be lean, simple, and beautiful.
 
 ## The philosophy
@@ -90,7 +92,25 @@ const name = user.name;
 
 ...unless `"Anonymous"` is genuinely a valid business-logic fallback (new user who hasn't set a name yet, etc.). Use judgment.
 
-### 5. No try/catch around code you expect to succeed
+### 5. No defensive normalization on trusted input
+
+Don't sanitize, normalize, or coerce values that are already known to be correct. Calls like `.trim()`, `.toLowerCase()`, `String(x)`, or `Number(x)` on values you control are bloat — they pretend the input might be malformed when it isn't. Reserve normalization for genuine boundaries: raw user input, parsed CLI args, or data from a source known to need cleaning.
+
+**Before:**
+
+```ts
+const slug = config.slug.trim().toLowerCase();
+return users.find((u) => u.id.trim() === id);
+```
+
+**After:**
+
+```ts
+const slug = config.slug.toLowerCase();
+return users.find((u) => u.id === id);
+```
+
+### 6. No try/catch around code you expect to succeed
 
 Try/catch hides crashes and makes failure silent. If something should work, let it throw. The only exception: explicitly handling known failure modes (e.g., a network request that might time out, where you want to show a specific error message).
 
@@ -111,7 +131,7 @@ try {
 return JSON.parse(raw).value;
 ```
 
-### 6. Discriminated unions over multiple optional fields
+### 7. Discriminated unions over multiple optional fields
 
 When an object can be in a few distinct states, model it as a union, not as a record with lots of optional fields. This eliminates whole classes of invalid states.
 
@@ -134,7 +154,7 @@ type Result =
   | { kind: "data"; user: User };
 ```
 
-### 7. Exhaustive handling — throw on unknown types
+### 8. Exhaustive handling — throw on unknown types
 
 When switching on a union or discriminated type, handle every case and throw on the default. This makes unknown states loud instead of silent.
 
@@ -147,7 +167,7 @@ switch (result.kind) {
 }
 ```
 
-### 8. Fewer lines, always
+### 9. Fewer lines, always
 
 When two forms are equivalent, prefer the shorter one. Don't introduce variables just to give things names if the expression is already clear inline. Don't split a 3-line function into two 2-line functions.
 
@@ -165,7 +185,7 @@ if (shouldShow) {
 if (user.status === "active" && user.verified) {
 ```
 
-### 9. Early returns
+### 10. Early returns
 
 Don't nest happy-path code inside an `if`. Return early for the guard case and let the happy path flow at the top level.
 
@@ -190,11 +210,11 @@ function process(item: Item | null) {
 }
 ```
 
-### 10. Don't over-extract functions
+### 11. Don't over-extract functions
 
 A short sequence of steps is often more readable inline than broken into named helper functions. Only extract a function if it's called from more than one place, or if the extracted function has a name that genuinely communicates something the inline code doesn't.
 
-### 11. Remove unnecessary changes
+### 12. Remove unnecessary changes
 
 If a change doesn't affect behavior, remove it. Whitespace reformatting, comment rewording, renames of internal variables — these add noise to the diff without value.
 
