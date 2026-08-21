@@ -1,6 +1,16 @@
 ---
 name: lean-code
-description: Review and rewrite code changes in the current branch to be lean, simple, and beautiful. Use this skill when the user asks to "clean up my branch", "make my code beautiful", "simplify my changes", "review my PR code", "polish my diff", or "make this code simpler". Also trigger when the user says things like "is my code clean?", "review my changes for quality", "make this more readable", "tighten up the code", or "apply code style to my branch". This skill enforces a specific opinionated philosophy: minimal state, no defensive code, discriminated unions, asserts over try/catch, fewer lines. Trigger even if the user doesn't say "lean" explicitly — any request to improve, clean, or beautify code changes belongs here.
+description: >-
+  Review and rewrite code changes in the current branch to be lean, simple, and
+  beautiful. Use this skill when the user asks to "clean up my branch", "make my
+  code beautiful", "simplify my changes", "review my PR code", "polish my
+  diff", or "make this code simpler". Also trigger when the user says things
+  like "is my code clean?", "review my changes for quality", "make this more
+  readable", "tighten up the code", or "apply code style to my branch". This
+  skill enforces a specific opinionated philosophy: minimal state, no defensive
+  code, discriminated unions, asserts over try/catch, fewer lines. Trigger even
+  if the user doesn't say "lean" explicitly — any request to improve, clean, or
+  beautify code changes belongs here.
 ---
 
 # Lean code
