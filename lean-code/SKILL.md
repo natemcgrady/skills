@@ -224,7 +224,30 @@ function process(item: Item | null) {
 
 A short sequence of steps is often more readable inline than broken into named helper functions. Only extract a function if it's called from more than one place, or if the extracted function has a name that genuinely communicates something the inline code doesn't.
 
-### 12. Remove unnecessary changes
+### 12. No comments unless absolutely necessary
+
+Comments should never explain what the code does — the code itself should say that. Delete comments that restate the code.
+
+Only keep a comment if it's clearly written by a human (captures intent, context, or a non-obvious "why") or the comment itself explicitly says it needs to remain in the code.
+
+**Before:**
+
+```ts
+// Loop through users and set active to true
+for (const user of users) {
+  user.active = true;
+}
+```
+
+**After:**
+
+```ts
+for (const user of users) {
+  user.active = true;
+}
+```
+
+### 13. Remove unnecessary changes
 
 If a change doesn't affect behavior, remove it. Whitespace reformatting, comment rewording, renames of internal variables — these add noise to the diff without value.
 
