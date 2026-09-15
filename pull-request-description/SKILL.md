@@ -42,3 +42,20 @@ The reader is a reviewer who wants to understand the PR in under a minute. Every
 
 - Be extremely concise and to the point — easy to skim, easy to understand.
 - Only include changes that are high impact or important. Skip refactors, cleanups, and mechanical changes (renames, formatting, version bumps) unless they're the point of the PR.
+
+## Full output example
+
+The output should look exactly like this — same structure, same headings, nothing added:
+
+```text
+fix(web): stop duplicate form submissions
+
+## Summary
+
+Prevent users from accidentally submitting a form twice by disabling the submit button while the request is in flight.
+
+## Changes
+
+- Disable submit button during submission
+- Add debounce to form submit handler
+```
