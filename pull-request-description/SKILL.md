@@ -45,7 +45,7 @@ The reader is a reviewer who wants to understand the PR in under a minute. Every
 
 ## Full output example
 
-The output should look exactly like this — same structure, same headings, nothing added:
+Unless the repo's existing PRs use a different structure (see above), the output should look exactly like this — same structure, same headings, nothing added:
 
 ```text
 fix(web): stop duplicate form submissions
@@ -59,3 +59,7 @@ Prevent users from accidentally submitting a form twice by disabling the submit 
 - Disable submit button during submission
 - Add debounce to form submit handler
 ```
+
+## After sharing the description
+
+Ask the user if they'd like you to commit. If yes, commit all changes with the PR description as the commit message (title as the subject line, body below it). Only commit — never push. Pushing is the user's call to make separately.
