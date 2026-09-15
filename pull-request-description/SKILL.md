@@ -1,6 +1,7 @@
 ---
 name: pull-request-description
-description: Generate a pull request description that matches the repo's existing conventions. Use this whenever the user asks to write, generate, or fill in a PR description — even if they just say "write the PR body" or "summarize this branch for review."
+description: >-
+  Generate a pull request description that matches the repo's existing conventions. Use this whenever the user asks to write, generate, or fill in a PR description — even if they just say 'write the PR body' or 'summarize this branch for review.'
 ---
 
 # Pull Request Description
