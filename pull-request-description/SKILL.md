@@ -63,4 +63,4 @@ Prevent users from accidentally submitting a form twice by disabling the submit 
 
 ## After sharing the description
 
-Ask the user if they'd like you to commit. If yes, commit all changes with the PR description as the commit message (title as the subject line, body below it). Only commit — never push. Pushing is the user's call to make separately.
+Immediately commit the changes unless the user explicitly tells you otherwise; do not ask for confirmation. Use the PR description as the commit message (title as the subject line, body below it). Only commit — never push. Pushing is the user's call to make separately.
