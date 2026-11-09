@@ -10,7 +10,7 @@ description: >-
 
 # Excalidraw diagrams
 
-Write a valid `.excalidraw` JSON file that someone understands in a few seconds, with as few words as possible. The style guide is Nate's `geist-colors.excalidraw`: Geist dark colors plus a sample diagram marked "Sloppiness: Architect, Edges: Sharp, Grid Step: 4". This skill is that guide in usable form. All ten steps of every hue are in [references/geist-palette.md](references/geist-palette.md). Read it before you use teal, purple, pink, gray-alpha, or any step not listed under Tokens.
+Write a valid `.excalidraw` JSON file that someone understands in a few seconds, with as few words as possible. The style guide is Nate's `geist-colors.excalidraw`: Geist dark colors plus a sample diagram marked "Sloppiness: Architect, Edges: Sharp, Grid Step: 4". This skill is that guide in usable form, for Excalidraw's native dark theme. All ten steps of every hue are in [references/geist-palette.md](references/geist-palette.md), converted for dark theme. Read it before you use teal, purple, pink, gray-alpha, or any step not listed under Tokens.
 
 ## Principles
 
@@ -32,31 +32,37 @@ Each Geist scale has ten steps, and each step has one job. Pick the step by its 
 | 700 | High-contrast background | Solid fill for the one element the diagram is about, at most one |
 | 900, 1000 | Text and icons | 1000 primary text and main arrows, 900 secondary text, return arrows, and marks |
 
-## Tokens
+## Native dark theme
 
-The canvas is background-100 `#0a0a0a`. It is also the default surface, so a neutral shape with a `transparent` fill reads as the canvas.
+Diagrams are always viewed in Excalidraw's native dark theme. Dark theme filters every canvas color, including the background: it inverts 93% and rotates the hue 180deg. So the file stores the color that becomes Geist after the filter, never the Geist hex itself. A Geist value written straight into the file renders wrong: `#0a0a0a` shows up almost white.
+
+- Write colors from the Write column below or from "File values" in the reference. The Renders column is what appears on screen.
+- The canvas is `"viewBackgroundColor": "#ffffff"`, which renders as the native dark background `#121212`. Nothing renders darker, so Geist Background 2 has no equivalent. The canvas is also the default surface, so a neutral shape with a `transparent` fill reads as the canvas.
+- Gray renders exactly. Vivid hues render a little softer than Geist because the filter caps saturation. That is expected, so don't chase exact Geist values.
+- Write every color as 6-digit lowercase hex.
+
+## Tokens
 
 Neutral (gray):
 
-| Role | Hex | Step |
-| --- | --- | --- |
-| Canvas, `viewBackgroundColor` | `#0a0a0a` | background-100 |
-| Recessed panel (sparingly) | `#000000` | background-200 |
-| Neutral fill when a shape needs one | `#1a1a1a` | gray-100 |
-| Structure: section rules, group boundaries, notes | `#2e2e2e` | gray-400 |
-| Ordinary shapes, lifelines, rails | `#454545` | gray-500 |
-| Focus shape (the neutral node that matters) | `#878787` | gray-600 |
-| Secondary text, return arrows | `#a1a1a1` | gray-900 |
-| Primary text, main arrows | `#ededed` | gray-1000 |
+| Role | Write | Renders | Step |
+| --- | --- | --- | --- |
+| Canvas, `viewBackgroundColor` | `#ffffff` | #121212 | native dark background |
+| Neutral fill when a shape needs one | `#f6f6f6` | #1a1a1a | gray-100 |
+| Structure: section rules, group boundaries, notes | `#dedede` | #2e2e2e | gray-400 |
+| Ordinary shapes, lifelines, rails | `#c4c4c4` | #454545 | gray-500 |
+| Focus shape (the neutral node that matters) | `#777777` | #878787 | gray-600 |
+| Secondary text, return arrows | `#595959` | #a1a1a1 | gray-900 |
+| Primary text, main arrows | `#000000` | #ededed | gray-1000 |
 
-Meaning (hues):
+Meaning (hues), as values to write:
 
 | Hue | Meaning | Node fill 300 | Node stroke 600 | Text and marks 900 | Region fill 100 | Region stroke 400 | Solid 700 |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| blue | selected, info, main path | `#002f62` | `#0090ff` | `#47a8ff` | `#06193a` | `#003674` | `#006efe` |
-| red | error, failure, danger | `#5d0e17` | `#f32e40` | `#ff565f` | `#330a11` | `#6f101b` | `#f13242` |
-| amber | in progress, warning | `#502800` | `#ed9a00` | `#ff9300` | `#2a1700` | `#5b3000` | `#ffae00` |
-| green | done, kept, passed | `#003a0e` | `#00952d` | `#00ca50` | `#002608` | `#004615` | `#00ac3a` |
+| blue | selected, info, main path | `#c0ddff` | `#1489ff` | `#0172d7` | `#e5f2ff` | `#b3d1ff` | `#4f8dff` |
+| red | error, failure, danger | `#ffd1d1` | `#ff655f` | `#ff5559` | `#ffeff3` | `#ffc2be` | `#ff6664` |
+| amber | in progress, warning | `#ffd6ab` | `#a54c00` | `#bd4500` | `#fff2d8` | `#ffcf8f` | `#8d3c00` |
+| green | done, kept, passed | `#b1f4c1` | `#14c249` | `#007e00` | `#d4ffdc` | `#9cedb4` | `#00a921` |
 
 Teal, purple, and pink mark categories that carry no status (owners, services, data kinds). Take them from the reference with the same step pattern.
 
@@ -64,15 +70,13 @@ Text color:
 
 - Labels inside any shape use gray-1000, including colored nodes.
 - Use hue 900 only for colored text outside a shape (a status word, a count) and for check marks and Xs.
-- On a 700 fill, use gray-1000 on blue and red, and `#0a0a0a` on amber and green. The reference lists the other hues.
+- On a 700 fill, use gray-1000 on blue and red, and `#ffffff` (renders #121212) on amber and green. The reference lists the other hues.
 - Secondary text (subtitles, captions, notes) is gray-900.
-
-Hex values are exact. Open the file in dark theme with the true-colors extension (`~/workspace/natemcgrady/excalidraw-true-colors`), or in light theme with this background set. Write every color as 6-digit lowercase hex: the extension still inverts the literal strings `#000`, `#fff`, and `#bbb`.
 
 ## Element defaults
 
 - Every element: `roughness: 0` (Architect), `fillStyle: "solid"`, `opacity: 100`, `angle: 0`, `roundness: null` (sharp edges). The only exception is opacity on gray-alpha shapes from the reference.
-- `appState`: `{ "viewBackgroundColor": "#0a0a0a", "gridSize": 20, "gridStep": 4, "gridModeEnabled": true }`.
+- `appState`: `{ "viewBackgroundColor": "#ffffff", "gridSize": 20, "gridStep": 4, "gridModeEnabled": true }`.
 - Every `x`, `y`, `width`, and `height` is a multiple of 4. Text bound to a container is exempt because Excalidraw positions it.
 - Shapes: `strokeWidth: 1`. The standard node is a 160 x 80 rectangle. Grow in 40 px steps for longer labels. Circles are 64 or 72 px.
 - Main arrows: gray-1000, `strokeWidth: 2`, solid, `endArrowhead: "triangle"`, `startArrowhead: null`.
@@ -128,8 +132,8 @@ The layout unit is 40 px. Fine positions snap to the 4 px grid step.
 ## Workflow
 
 1. Write the story first: 3 sections or fewer, each with one sentence of meaning. Assign each hue its single meaning.
-2. Generate the JSON with a small script (Python or Node). Declare the tokens above as named constants once at the top, so no hex is typed inline. Give every element a unique `id`, `seed`, and increasing `index`.
+2. Generate the JSON with a small script (Python or Node). Declare the tokens above, using their Write values, as named constants once at the top so no hex is typed inline. Give every element a unique `id`, `seed`, and increasing `index`.
 3. Save the file to the repo or the path the user gives, with a descriptive kebab-case name.
-4. Run `python3 <skill-dir>/scripts/check_style.py <file>.excalidraw` and fix every finding until it prints `ok`. The script checks colors against the palette, the background, sloppiness, sharp edges, fonts, stroke widths, opacity, and the 4 px grid.
-5. Render a preview (an SVG of the same elements; on macOS, `qlmanage -t -s 1600 -o <dir> <file>.svg` turns it into a PNG) and look at it. Done means: no overlaps, no clipped text, every arrow lands on a shape or lifeline, and every label is readable against its fill.
+4. Run `python3 <skill-dir>/scripts/check_style.py <file>.excalidraw` and fix every finding until it prints `ok`. The script checks colors against the dark-theme file values, the background, sloppiness, sharp edges, fonts, stroke widths, opacity, and the 4 px grid.
+5. Render a preview of what dark theme shows: an SVG of the same elements with every color passed through `rendered()` from `scripts/check_style.py`. On macOS, `qlmanage -t -s 1600 -o <dir> <file>.svg` turns it into a PNG. Look at it. Done means: no overlaps, no clipped text, every arrow lands on a shape or lifeline, and every label is readable against its fill.
 6. Reply with the file path and a short summary of each section. If the diagram was checked in a preview rather than in Excalidraw, say so.
